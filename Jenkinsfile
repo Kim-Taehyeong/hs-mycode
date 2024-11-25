@@ -30,6 +30,7 @@ spec:
         }
     }
     environment {
+	container="docker"
         IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:${env.BUILD_ID}"
     }
 	stages {
@@ -41,7 +42,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --force'
+					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION'
 				}
 			}
 		}
