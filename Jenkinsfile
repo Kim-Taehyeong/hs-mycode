@@ -7,7 +7,7 @@ kind: Pod
 spec:
   containers:
   - name: kaniko
-    iamge: gcr.io/kaniko-project/executor:debug
+    image: gcr.io/kaniko-project/executor:debug
     command: ['sleep']
     args: ['infinity']
   volumeMounts:
