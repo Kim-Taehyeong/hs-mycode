@@ -41,7 +41,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					withEnv('[PATH+EXTRA=/busybox]') {
+					withEnv(['PATH+EXTRA=/busybox']) {
 						sh '''#!/busybox/sh /kaniko/executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION'''
 					}
 				}
