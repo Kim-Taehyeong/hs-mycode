@@ -21,7 +21,7 @@ spec:
           whenUnsatisfiable : "DoNotSchedule"
       containers:
         - name: server
-          image: taehyeok02/mycode-server:latest
+          image: taehyeok02/mycode-server
           volumeMounts:
             - name: mycode-data
               mountPath: /home/vscode
@@ -31,3 +31,6 @@ spec:
         - name : mycode-data
           persistentVolumeClaim:
             claimName: mycode-pvc-dynamic
+      imagePullSecrets:
+        - name: docker-secret
+          namespace: default
