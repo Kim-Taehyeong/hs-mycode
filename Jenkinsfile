@@ -9,10 +9,10 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug-v0.19.0
+    image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     command:
-    - /busybox/cat
+    - sleep
     tty: true
     volumeMounts:
       - name: jenkins-docker-cfg
@@ -30,7 +30,7 @@ spec:
         }
     }
     environment {
-        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server${env.BUILD_ID}"
+        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:${env.BUILD_ID}"
     }
 	stages {
 		stage('git clone') {
