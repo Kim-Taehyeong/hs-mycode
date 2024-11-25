@@ -15,7 +15,7 @@ pipeline {
 		stage('Docker Build') {
 			steps() {
 				script {
-					dockerImage = docker.build repository + "$BULID_NUMBER"	
+					dockerImage = docker.build repository + ":${env.BULID_ID}"
 				}
 			}
 		}
@@ -26,12 +26,12 @@ pipeline {
 		}
 		stage('Push Image to Docker Hub') {
 			steps() {
-				sh 'docker push $repository:$BUILD_NUMBER'
+				sh 'docker push $repository:${env.BUILD_ID}'
 			}
 		}
 		stage('Delete Docker Image') {
 			steps() {
-				sh 'docker rmi $repository:%BUILD_NUMBER'
+				sh 'docker rmi $repository:${env.BUILD_ID}'
 			}
 		}
 	}
