@@ -14,8 +14,10 @@ pipeline {
 		}
 		stage('Docker Build') {
 			steps() {
-				dockerImage = docker.build repository + "$BULID_NUMBER"	
+				script {
+					dockerImage = docker.build repository + "$BULID_NUMBER"	
 				}
+			}
 		}
 		stage('Docker Login') {
 			steps() {
