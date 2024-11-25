@@ -1,26 +1,23 @@
 pipeline {
-	agent {
-		kubernetes {
-			yaml '''
+    agent {
+        kubernetes {
+            yaml """
 apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command: ['sleep']
-    args: ['infinity']
-  volumeMounts:
-  - name: registry-credentials
-    mountPath: /kaniko/.docker
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:debug
+      volumeMounts:
+        - name: docker-secret
+          mountPath: /kaniko/.docker/
   volumes:
-  - name: registry-credentials
-    secret:
-      secretName: regcred
-      items: 
-      - key: .dockerconfigjson
-        path: config.json
-'''
+    - name: docker-secret
+      secret:
+        secretName: docker-secret
+            """
+        }
+    }
 		}
 	}
 	stages {
