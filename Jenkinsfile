@@ -18,8 +18,6 @@ spec:
             """
         }
     }
-		}
-	}
 	stages {
 		stage('git clone') {
 			steps() {
