@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       name: mycode-server
+      namespace: hs
       labels:
         app: server
     spec:
