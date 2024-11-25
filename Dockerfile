@@ -22,7 +22,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 RUN useradd -m vscode && echo "vscode:vscode" | chpasswd && adduser vscode sudo
 
-WORKDIR /home/vscode
+WORKDIR /home/vscodebcd
 
 EXPOSE 8080
 
