@@ -1,4 +1,9 @@
 pipeline {
+	environment {
+		repository = "taehyeok02/mycode-server"
+		DOCKERHUB_CREDENTIALS = credentials('docker-hub')
+		dockerImage = ''
+	}
 	agent any
 
 	stages {
@@ -9,17 +14,20 @@ pipeline {
 		}
 		stage('Docker Build') {
 			steps() {
-				echo 'Docker Build...'
+				dockerImage = docker.build repository + "$BULID_NUMBER"	
 				}
+		}
+		stage('Docker Login') {
+			sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 		}
 		stage('Push Image to Docker Hub') {
 			steps() {
-				echo 'Push Image to Docker Hub'
+				sh 'docker push $repository:$BUILD_NUMBER'
 			}
 		}
-		stage('Deploy to Kubernetes') {
+		stage('Delete Docker Image') {
 			steps() {
-				echo 'Deploy to Kubernetes'
+				sh 'docker rmi $repository:%BUILD_NUMBER'
 			}
 		}
 	}
