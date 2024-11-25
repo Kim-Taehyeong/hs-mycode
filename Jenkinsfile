@@ -4,19 +4,33 @@ pipeline {
             yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+  name: kaniko
 spec:
   containers:
-    - name: kaniko
-      image: gcr.io/kaniko-project/executor:debug
-      volumeMounts:
-        - name: docker-secret
-          mountPath: /kaniko/.docker/
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug-v0.19.0
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
   volumes:
-    - name: docker-secret
-      secret:
-        secretName: docker-secret
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: docker-secret
+          items:
+            - key: .dockerconfigjson
+              path: config.json
             """
         }
+    }
+    environment {
+        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server${env.BUILD_ID}"
     }
 	stages {
 		stage('git clone') {
@@ -26,11 +40,10 @@ spec:
 		}
 		stage('Push Image to Docker Hub') {
 			steps() {
-				container('kaniko') {
-					sh "executor --dockerfile=Dockerfile \
-					--context=dir://${env.WORKSPACE} \
-					--destination=taehyeok02/mycode-server:${env.BUILD_ID} \
-					--destination=taehyeok02/mycode-server:latest"
+				container(name : 'kaniko', shell: '/busybox/sh') {
+					withEnv('[PATH+EXTRA=/busybox]') {
+						sh '''#!/busybox/sh /kaniko/executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION'''
+					}
 				}
 			}
 		}
