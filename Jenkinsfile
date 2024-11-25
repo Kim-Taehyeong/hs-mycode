@@ -31,7 +31,7 @@ spec:
     }
     environment {
 	container="docker"
-        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:${env.BUILD_ID}"
+        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:latest"
     }
 	stages {
 		stage('git clone') {
