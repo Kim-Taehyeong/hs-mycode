@@ -12,7 +12,7 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
     command:
-    - sleep
+    - /busybox/cat
     tty: true
     volumeMounts:
       - name: jenkins-docker-cfg
@@ -41,7 +41,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION'
+					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --force'
 				}
 			}
 		}
