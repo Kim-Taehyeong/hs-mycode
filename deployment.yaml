@@ -34,4 +34,3 @@ spec:
             claimName: mycode-pvc-dynamic
       imagePullSecrets:
         - name: docker-secret
-          namespace: default
