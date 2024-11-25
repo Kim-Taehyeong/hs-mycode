@@ -1,29 +1,28 @@
 pipeline {
-
 	agent {
-	    kubernetes {
-	yaml '''
-	apiVersion: v1
-	kind: Pod
-	spec:
-	  containers:
-	  - name: kaniko
-	    iamge: gcr.io/kaniko-project/executor:debug
-	    command: ['sleep']
-	    args: ['infinity']
-	    volumeMounts:
-	      - name: registry-credentials
-	        mountPath: /kaniko/.docker
-	  volumes:
-	    - name: registry-credentials
-	      secret:
-	        secretName: regcred
-	        items: 
-	        - key: .dockerconfigjson
-	          path: config.json
-	'''
-	    }
-	  }
+		kubernetes {
+			yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: kaniko
+    iamge: gcr.io/kaniko-project/executor:debug
+    command: ['sleep']
+    args: ['infinity']
+  volumeMounts:
+  - name: registry-credentials
+    mountPath: /kaniko/.docker
+  volumes:
+  - name: registry-credentials
+    secret:
+      secretName: regcred
+      items: 
+      - key: .dockerconfigjson
+        path: config.json
+'''
+		}
+	}
 	stages {
 		stage('git clone') {
 			steps() {
