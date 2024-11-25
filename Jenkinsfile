@@ -1,11 +1,29 @@
 pipeline {
-	environment {
-		repository = "taehyeok02/mycode-server"
-		DOCKERHUB_CREDENTIALS = credentials('docker-hub')
-		dockerImage = ''
-	}
-	agent any
 
+	agent {
+	    kubernetes {
+	yaml '''
+	apiVersion: v1
+	kind: Pod
+	spec:
+	  containers:
+	  - name: kaniko
+	    iamge: gcr.io/kaniko-project/executor:debug
+	    command: ['sleep']
+	    args: ['infinity']
+	    volumeMounts:
+	      - name: registry-credentials
+	        mountPath: /kaniko/.docker
+	  volumes:
+	    - name: registry-credentials
+	      secret:
+	        secretName: regcred
+	        items: 
+	        - key: .dockerconfigjson
+	          path: config.json
+	'''
+	    }
+	  }
 	stages {
 		stage('git clone') {
 			steps() {
@@ -19,19 +37,14 @@ pipeline {
 				}
 			}
 		}
-		stage('Docker Login') {
-			steps() {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
 		stage('Push Image to Docker Hub') {
 			steps() {
-				sh 'docker push $repository:${env.BUILD_ID}'
-			}
-		}
-		stage('Delete Docker Image') {
-			steps() {
-				sh 'docker rmi $repository:${env.BUILD_ID}'
+				container('kaniko') {
+					sh "executor --dockerfile=Dockerfile \
+					--context=dir://${env.WORKSPACE} \
+					--destination=${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}:${env.BUILD_ID} \
+					--destination=${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}:latest"
+				}
 			}
 		}
 	}
