@@ -31,7 +31,8 @@ spec:
     }
     environment {
 	container="docker"
-        IMAGE_PUSH_DESTINATION1="taehyeok02/mycode-server:${env.BUILD_ID}"
+        IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:${env.BUILD_ID}"
+	IMAGE_PUSH_DESTINATION2="taehyeok02/mycode-server:latest"
     }
 	stages {
 		stage('git clone') {
@@ -42,7 +43,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION'
+					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2'
 				}
 			}
 		}
