@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycode-server
+  labels:
+    app: server
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      name: mycode-server
+      labels:
+        app: server
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey : "kubernetes.io/hostname"
+          whenUnsatisfiable : "DoNotSchedule"
+      containers:
+        - name: server
+          image: hs-vscode:latest
+          volumeMounts:
+            - name: mycode-data
+              mountPath: /home/vscode
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name : mycode-data
+          persistentVolumeClaim:
+            claimName: mycode-pvc-dynamic

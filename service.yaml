@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycode-server-service
+  labels:
+    app: server
+spec:
+  selector:
+    app: server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
