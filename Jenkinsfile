@@ -18,7 +18,9 @@ pipeline {
 				}
 		}
 		stage('Docker Login') {
-			sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			steps() {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
 		}
 		stage('Push Image to Docker Hub') {
 			steps() {
