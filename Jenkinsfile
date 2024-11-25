@@ -29,13 +29,6 @@ spec:
 				git 'https://github.com/Kim-Taehyeong/hs-mycode.git'
 			}
 		}
-		stage('Docker Build') {
-			steps() {
-				script {
-					dockerImage = docker.build repository + ":${env.BULID_ID}"
-				}
-			}
-		}
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container('kaniko') {
