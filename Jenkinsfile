@@ -34,8 +34,8 @@ spec:
 				container('kaniko') {
 					sh "executor --dockerfile=Dockerfile \
 					--context=dir://${env.WORKSPACE} \
-					--destination=${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}:${env.BUILD_ID} \
-					--destination=${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}:latest"
+					--destination=taehyeok02/mycode-server:${env.BUILD_ID} \
+					--destination=taehyeok02/mycode-server:latest"
 				}
 			}
 		}
