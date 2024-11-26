@@ -22,7 +22,8 @@ spec:
           whenUnsatisfiable : "DoNotSchedule"
       containers:
         - name: server
-          image: taehyeok02/mycode-server
+          image: taehyeok02/mycode-server:latest
+          imagePullPolicy: Always
           volumeMounts:
             - name: mycode-data
               mountPath: /home/vscode
