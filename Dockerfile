@@ -34,8 +34,6 @@ ARG USER="mycode"
 
 ARG PASSWORD
 
-ENV PASSWORD="${PASSWORD}"
-
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 WORKDIR /home/mycode
