@@ -31,6 +31,7 @@ spec:
     }
     environment {
 	container="docker"
+	MY_PASSWORD=credentials('mycode-password')
         IMAGE_PUSH_DESTINATION="taehyeok02/mycode-server:${env.BUILD_ID}"
 	IMAGE_PUSH_DESTINATION2="taehyeok02/mycode-server:latest"
     }
@@ -43,7 +44,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2'
+					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD}'
 				}
 			}
 		}

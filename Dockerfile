@@ -16,16 +16,30 @@ RUN apt-get update && \
     libnss3-dev \
     libasound2-dev \
     libxtst6 \
-    libxss1
+    libxss1 \
+    net-tools
+
+ARG USER="mycode"
+
+ARG PASSWORD
+
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+
+RUN apt-get install -y python3 python3-pip
+
+RUN apt-get install -y gcc g++
+
+RUN RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN useradd -m vscode && echo "vscode:vscode" | chpasswd && adduser vscode sudo
+RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
-WORKDIR /home/vscodebcd
+WORKDIR /home/mycode
 
 EXPOSE 8080
 
-USER vscode
+USER mycode
 
-CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "none"]
+CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "password"]
