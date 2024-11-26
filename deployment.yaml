@@ -22,12 +22,6 @@ spec:
           whenUnsatisfiable : "DoNotSchedule"
       containers:
         - name: server
-          env:
-            - name: password
-              valueFrom:
-                secretKeyRef:
-                  name: mycode-password
-                  key: password
           image: taehyeok02/mycode-server:latest
           imagePullPolicy: Always
           volumeMounts:
