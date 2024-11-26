@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - name: mycode-data
-              mountPath: /home/vscode
+              mountPath: /home/mycode
           ports:
             - containerPort: 8080
       volumes:
