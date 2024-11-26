@@ -1,10 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y openjdk-11-jdk
-
-RUN apt-get install -y python3 python3-pip
-
-RUN apt-get install -y gcc g++
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh -
 
 RUN apt-get update && \
     apt-get install -y \
@@ -23,9 +19,14 @@ RUN apt-get update && \
     libasound2-dev \
     libxtst6 \
     libxss1 \
-    net-tools
+    net-tools \
+    openjdk-11-jdk \
+    python3 \
+    python3-pip \
+    gcc \
+    g++ \
+    nodejs
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh - && apt-get install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
