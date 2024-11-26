@@ -1,5 +1,11 @@
 FROM ubuntu:22.04
 
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+
+RUN apt-get install -y python3 python3-pip
+
+RUN apt-get install -y gcc g++
+
 RUN apt-get update && \
     apt-get install -y \
     curl \
@@ -19,20 +25,13 @@ RUN apt-get update && \
     libxss1 \
     net-tools
 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh - && apt-get install -y nodejs
+
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
 ARG USER="mycode"
 
 ARG PASSWORD
-
-RUN apt-get update && apt-get install -y openjdk-11-jdk
-
-RUN apt-get install -y python3 python3-pip
-
-RUN apt-get install -y gcc g++
-
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs
-
-RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
