@@ -29,7 +29,7 @@ RUN apt-get install -y python3 python3-pip
 
 RUN apt-get install -y gcc g++
 
-RUN RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
