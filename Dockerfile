@@ -32,11 +32,11 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 ARG USER="mycode"
 
-ARG PASSWORD_ARG
+ARG PASSWORD
 
-ENV PASSWORD="${PASSWORD_ARG}"
+ENV PASSWORD="${PASSWORD}"
 
-RUN useradd -m ${USER} && echo "${USER}:${PASSWORD_ARG}" | chpasswd && adduser ${USER} sudo
+RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 WORKDIR /home/mycode
 
