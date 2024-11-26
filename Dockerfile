@@ -42,4 +42,4 @@ EXPOSE 8080
 
 USER mycode
 
-CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "password"]
+CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "password", "--password", "${PASSWORD}"]

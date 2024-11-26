@@ -33,5 +33,6 @@ spec:
         - name : mycode-data
           persistentVolumeClaim:
             claimName: mycode-pvc-dynamic
+            namespace: hs
       imagePullSecrets:
         - name: docker-secret
