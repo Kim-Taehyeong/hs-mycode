@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+ENV TZ=Asia/Seoul
+
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh -
 
 RUN apt-get update && \
@@ -34,8 +36,6 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 ARG USER="mycode"
 
 ARG PASSWORD
-
-ENV TZ=Asia/Seoul
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
