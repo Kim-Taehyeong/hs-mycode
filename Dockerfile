@@ -29,7 +29,9 @@ RUN apt-get update && \
     gcc \
     g++ \
     nodejs \
-    tzdata
+    tzdata \
+    python3.10-venv \
+    vim
 
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
