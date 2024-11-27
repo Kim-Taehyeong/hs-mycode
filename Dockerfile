@@ -25,7 +25,8 @@ RUN apt-get update && \
     python3-pip \
     gcc \
     g++ \
-    nodejs
+    nodejs \
+    tzdata
 
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
@@ -33,6 +34,10 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 ARG USER="mycode"
 
 ARG PASSWORD
+
+ENV TZ=Asia/Seoul
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
