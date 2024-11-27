@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ENV TZ=Asia/Seoul
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh -
 
