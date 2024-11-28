@@ -28,11 +28,13 @@ RUN apt-get update && \
     python3-pip \
     gcc \
     g++ \
-    nodejs \
     tzdata \
     python3.10-venv \
     vim
 
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+RUN nvm install 22
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
