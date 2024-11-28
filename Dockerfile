@@ -32,6 +32,11 @@ RUN apt-get update && \
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.bashrc
+RUN source ~/.bashrc`
+
 RUN echo 'nvm install 22' | bash
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
