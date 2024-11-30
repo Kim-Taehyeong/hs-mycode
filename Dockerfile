@@ -30,11 +30,9 @@ RUN apt-get update && \
     python3.10-venv \
     vim
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+RUN curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -E -
 
-SHELL ["/bin/bash", "-c"]
-
-RUN source ~/.nvm/nvm.sh && nvm install 22
+RUN sudo apt install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
