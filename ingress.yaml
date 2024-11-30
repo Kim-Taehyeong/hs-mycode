@@ -34,34 +34,41 @@ spec:
               service:
                 name: mycode-server-service
                 port:
+                  number: 3000
+            path: /3000
+            pathType: Prefix
+          - backend:
+              service:
+                name: mycode-server-service
+                port:
                   number: 3001
             path: /3001
-            pathType: Exact  
+            pathType: Prefix
           - backend:
               service:
                 name: mycode-server-service
                 port:
                   number: 3002
             path: /3002
-            pathType: Exact  
+            pathType: Prefix
           - backend:
               service:
                 name: mycode-server-service
                 port:
                   number: 3003
             path: /3003
-            pathType: Exact  
+            pathType: Prefix
           - backend:
               service:
                 name: mycode-server-service
                 port:
                   number: 3004
             path: /3004
-            pathType: Exact  
+            pathType: Prefix
           - backend:
               service:
                 name: mycode-server-service
                 port:
                   number: 3005
             path: /3005
-            pathType: Exact  
+            pathType: Prefix
