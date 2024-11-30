@@ -30,8 +30,6 @@ spec:
           ports:
             - name: main
               containerPort: 8080
-            - name: dev1
-              containerPort: 3000
       volumes:
         - name : mycode-data
           persistentVolumeClaim:

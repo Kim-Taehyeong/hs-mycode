@@ -11,23 +11,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      name: main
       targetPort: 8080
-    - port: 3000
-      name: dev1
-      targetPort: 3000
-    - port: 3001
-      name: dev2
-      targetPort: 3001
-    - port: 3002
-      name: dev3
-      targetPort: 3002
-    - port: 3003
-      name: dev4
-      targetPort: 3003
-    - port: 3004
-      name: dev5
-      targetPort: 3004
-    - port: 3005
-      name: dev6
-      targetPort: 3005
