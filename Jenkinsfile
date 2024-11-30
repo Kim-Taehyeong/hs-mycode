@@ -48,5 +48,19 @@ spec:
 				}
 			}
 		}
+    stage('Update Git Repo') {
+      steps() {
+        script {
+            sh """
+                git config --global user.email "taehyeok02@gmail.com"
+                git config --global user.name "Kim-Taehyeong"
+                sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:${env.BUILD_ID}|' deployment.yaml
+                git add deployment.yaml
+                git commit -m "Update image tag to ${env.BUILD_ID}"
+                git push origin master
+            """
+      }
+    }
+    }
 	}
 }

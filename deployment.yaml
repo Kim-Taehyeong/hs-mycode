@@ -26,13 +26,13 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - name: mycode-data
-              mountPath: /home/vscode
+              mountPath: /home/mycode
           ports:
-            - containerPort: 8080
+            - name: main
+              containerPort: 8080
       volumes:
         - name : mycode-data
           persistentVolumeClaim:
             claimName: mycode-pvc-dynamic
-            namespace: hs
       imagePullSecrets:
         - name: docker-secret

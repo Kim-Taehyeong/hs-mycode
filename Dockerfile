@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh -
+ENV TZ=Asia/Seoul
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
@@ -25,14 +26,21 @@ RUN apt-get update && \
     python3-pip \
     gcc \
     g++ \
-    nodejs
+    tzdata \
+    python3.10-venv \
+    vim
 
+RUN curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -E -
+
+RUN sudo apt install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 ARG USER="mycode"
 
 ARG PASSWORD
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
@@ -42,4 +50,4 @@ EXPOSE 8080
 
 USER mycode
 
-CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "password", "--password", "${PASSWORD}"]
+CMD ["code-server", "--host", "0.0.0.0", "--port", "8080", "--auth", "password"]
