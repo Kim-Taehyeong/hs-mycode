@@ -53,9 +53,10 @@ spec:
         script {
             withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
               sh '''
-              git config credential.helper store --global
+              git config --global credential.helper store
               git config --global user.name "${GIT_USERNAME}"
               git config --global user.password "${GIT_PASSWORD}"
+              git config --list
               git push --set-upstream origin master
               '''
           }
