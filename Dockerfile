@@ -3,8 +3,6 @@ FROM ubuntu:22.04
 ENV TZ=Asia/Seoul
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sh -
-
 RUN apt-get update && \
     apt-get install -y \
     curl \
@@ -28,11 +26,15 @@ RUN apt-get update && \
     python3-pip \
     gcc \
     g++ \
-    nodejs \
     tzdata \
     python3.10-venv \
     vim
 
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+SHELL ["/bin/bash", "-c"]
+
+RUN source ~/.nvm/nvm.sh && nvm install 22
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
