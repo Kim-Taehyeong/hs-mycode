@@ -51,26 +51,13 @@ spec:
     stage('Update Git Repo') {
       steps() {
         script {
-            sh 'git config --global credential.helper cache'
-            sh 'git config --global push.default simple'
-            sh 'git config --global user.email "taehyeok02@gmail.com'
-            sh 'git config --global user.name "Kim-Taehyeong'
-
-            checkout([
-                $class: 'GitSCM',
-                branches: [[name: master]],
-                extensions: [
-                    [$class: 'CloneOption', noTags: true, reference: '', shallow: true]
-                ],
-                submoduleCfg: [],
-                userRemoteConfigs: [
-                    [ credentialsId: 'github', url: cloneUrl]
-                ]
-            ])
-            sh "git checkout ${branch}"
-            sh "sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:${env.BUILD_ID}|' deployment.yaml"
-            git add deployment.yaml
-            git push origin master
+            withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+              sh '''
+              git config --global user.name "${GIT_USERNAME}"
+              git config --global user.password "${GIT_PASSWORD}"
+              git push --set-upstream origin master
+              '''
+          }
       }
     }
     }
