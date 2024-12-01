@@ -51,16 +51,12 @@ spec:
     stage('Update Git Repo') {
       steps() {
         script {
-            sshagent(credentials: ['github']) {
+            withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
               sh '''
-              git config --global credential.helper store
-              git config --global user.name "${GIT_USERNAME}"
-              git config --global user.password "${GIT_PASSWORD}"
-              git config --list
               sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:70|' deployment.yaml
               git add .
               git commit -m "Update Docker Image Version"
-              git push git@github.com:Kim-Taehyeong/hs-mycode.git master
+              git push origin master
               '''
           }
       }
