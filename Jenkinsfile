@@ -51,13 +51,16 @@ spec:
     stage('Update Git Repo') {
       steps() {
         script {
-            withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+            sshagent(credentials: ['github']) {
               sh '''
               git config --global credential.helper store
               git config --global user.name "${GIT_USERNAME}"
               git config --global user.password "${GIT_PASSWORD}"
               git config --list
-              git push --set-upstream origin master
+              sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:70|' deployment.yaml
+              git add .
+              git commit -m "Update Docker Image Version"
+              git push git@github.com:Kim-Taehyeong/hs-mycode.git master
               '''
           }
       }
