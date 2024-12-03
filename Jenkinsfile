@@ -43,7 +43,6 @@ spec:
 			}
 		}
 		stage('Push Image to Docker Hub') {
-			when { branch 'main'}
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
 					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
@@ -52,7 +51,6 @@ spec:
 		}
     stage('Update Git Repo') {
       steps() {
-	when { branch 'main'}
         script {
             withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
               sh """
