@@ -28,7 +28,9 @@ RUN apt-get update && \
     g++ \
     tzdata \
     python3.10-venv \
-    vim
+    vim \
+    iputils-ping \
+    xinetd
 
 RUN curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -E -
 
