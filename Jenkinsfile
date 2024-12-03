@@ -56,7 +56,7 @@ spec:
               sh '''
               git config --global user.email "taehyeok02@gmail.com"
               git config --global user.name "KimTaehyeong"
-              sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:70|' deployment.yaml
+              sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:70|' k8s/deployment.yaml
               git add .
               git commit -m "Update Docker Image Version"
               git push origin main
