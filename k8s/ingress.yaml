@@ -19,6 +19,9 @@ spec:
     - secretName: code-taehyeok-org-tls
       hosts:
       - code.taehyeok.org
+    - secretName: test-taehyeok-org-tls
+      hosts:
+      - test.taehyeok.org
   ingressClassName: nginx
   rules:
     - host: code.taehyeok.org
@@ -29,5 +32,16 @@ spec:
                 name: mycode-server-service
                 port:
                   number: 80
+            pathType: Prefix
+            path: /
+        
+    - host: test.taehyeok.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: mycode-server-service
+                port:
+                  number: 3000
             pathType: Prefix
             path: /

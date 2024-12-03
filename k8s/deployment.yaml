@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: mycode-server
   labels:
-    app: server
+    app: mycode-server
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: server
+      app: mycode-server
   template:
     metadata:
       name: mycode-server
       namespace: hs
       labels:
-        app: server
+        app: mycode-server
     spec:
       topologySpreadConstraints:
         - maxSkew: 1
@@ -22,7 +22,7 @@ spec:
           whenUnsatisfiable : "DoNotSchedule"
       containers:
         - name: server
-          image: taehyeok02/mycode-server:3
+          image: taehyeok02/mycode-server:31
           imagePullPolicy: Always
           volumeMounts:
             - name: mycode-data
@@ -30,6 +30,8 @@ spec:
           ports:
             - name: main
               containerPort: 8080
+            - name: test
+              containerPort: 3000
       volumes:
         - name : mycode-data
           persistentVolumeClaim:
