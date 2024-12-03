@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: mycode-server
   labels:
-    app: mycode-server
+    app: server
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: mycode-server
+      app: server
   template:
     metadata:
       name: mycode-server
       namespace: hs
       labels:
-        app: mycode-server
+        app: server
     spec:
       topologySpreadConstraints:
         - maxSkew: 1
@@ -30,8 +30,6 @@ spec:
           ports:
             - name: main
               containerPort: 8080
-            - name: test
-              containerPort: 3000
       volumes:
         - name : mycode-data
           persistentVolumeClaim:

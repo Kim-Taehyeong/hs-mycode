@@ -31,36 +31,3 @@ spec:
                   number: 80
             pathType: Prefix
             path: /
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: mycode-server
-  namespace: hs
-  annotations:
-    nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-name: "SESSIONID"
-    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
-    nginx.ingress.kubernetes.io/session-cookie-secure: "true"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
-    nginx.ingress.kubernetes.io/proxy-set-headers: "Upgrade $http_upgrade, Connection Upgrade, Host $host"
-spec:
-  tls: 
-    - secretName: test-taehyeok-org-tls
-      hosts:
-      - test.taehyeok.org
-  ingressClassName: nginx
-  rules:
-    - host: test.taehyeok.org
-      http:
-        paths:
-          - backend:
-              service:
-                name: mycode-server-service
-                port:
-                  number: 3000
-            pathType: Prefix
-            path: /

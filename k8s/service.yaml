@@ -4,16 +4,11 @@ metadata:
   name: mycode-server-service
   namespace: hs
   labels:
-    app: mycode-server
+    app: server
 spec:
   selector:
-    app: mycode-server
+    app: server
   ports:
     - protocol: TCP
-      name: Main
       port: 80
       targetPort: 8080
-    - protocol: TCP
-      name: Test
-      port: 3000
-      targetPort: 3000
