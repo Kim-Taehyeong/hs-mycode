@@ -58,7 +58,10 @@ spec:
               sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:70|' deployment.yaml
               git add .
               git commit -m "Update Docker Image Version"
-              git push origin master
+              git push origin main
+              git checkout ArgoCD
+              git merge origin main
+              git push
               '''
           }
       }
