@@ -1,3 +1,3 @@
 # hs-mycode
 
-abcdefg
+My Code
