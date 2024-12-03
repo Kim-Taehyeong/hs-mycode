@@ -54,17 +54,14 @@ spec:
         script {
             withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
               sh """
-              git checkout main
-              git pull origin main
+              git checkout ArgoCD
+              git pull origin ArgoCD
+              git merge origin main
               git config --global user.email "taehyeok02@gmail.com"
               git config --global user.name "KimTaehyeong"
               sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:${env.BUILD_ID}|' k8s/deployment.yaml
               git add .
               git commit -m "Update Docker Image Version"
-              git push origin main
-              git checkout ArgoCD
-              git pull origin ArgoCD
-              git merge origin main
               git push origin ArgoCD
               """
           }
