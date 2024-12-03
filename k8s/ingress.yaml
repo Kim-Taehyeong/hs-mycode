@@ -29,5 +29,5 @@ spec:
                 name: mycode-server-service
                 port:
                   number: 80
-            path: /
             pathType: Prefix
+            path: /
