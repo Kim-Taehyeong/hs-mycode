@@ -45,7 +45,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					//sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
+					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
 				}
 			}
 		}
@@ -54,11 +54,11 @@ spec:
         script {
             withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
               sh """
+              git config --global user.email "taehyeok02@gmail.com"
+              git config --global user.name "KimTaehyeong"
               git checkout ArgoCD
               git pull origin ArgoCD
               git merge origin/main
-              git config --global user.email "taehyeok02@gmail.com"
-              git config --global user.name "KimTaehyeong"
               sed -i 's|image: taehyeok02/mycode-server:.*|image: taehyeok02/mycode-server:${env.BUILD_ID}|' k8s/deployment.yaml
               git add .
               git commit -m "Update Docker Image Version"
