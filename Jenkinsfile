@@ -61,7 +61,7 @@ spec:
               git push origin main
               git checkout ArgoCD
               git merge origin main
-              git push
+              git push origin ArgoCD
               '''
           }
       }
