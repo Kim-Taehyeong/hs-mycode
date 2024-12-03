@@ -37,12 +37,18 @@ spec:
     }
 	stages {
 		stage('git clone') {
+			when {
+		                branch 'main'
+		        }
 			steps() {
         checkout scmGit(branches: [[name: 'main']], 
                                 userRemoteConfigs: [[url: 'https://github.com/Kim-Taehyeong/hs-mycode.git']])
 			}
 		}
 		stage('Push Image to Docker Hub') {
+			when {
+		                branch 'main'
+		        }
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
 					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
@@ -51,6 +57,9 @@ spec:
 		}
     stage('Update Git Repo') {
       steps() {
+	when {
+                branch 'main'
+        }
         script {
             withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
               sh """
