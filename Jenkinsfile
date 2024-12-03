@@ -38,7 +38,8 @@ spec:
 	stages {
 		stage('git clone') {
 			steps() {
-				git 'https://github.com/Kim-Taehyeong/hs-mycode.git'
+        checkout scmGit(branches: [[name: 'main']], 
+                                userRemoteConfigs: [[url: 'https://github.com/Kim-Taehyeong/hs-mycode.git']])
 			}
 		}
 		stage('Push Image to Docker Hub') {
