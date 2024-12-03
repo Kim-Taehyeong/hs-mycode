@@ -22,7 +22,7 @@ spec:
           whenUnsatisfiable : "DoNotSchedule"
       containers:
         - name: server
-          image: taehyeok02/mycode-server:3
+          image: taehyeok02/mycode-server:7
           imagePullPolicy: Always
           volumeMounts:
             - name: mycode-data
