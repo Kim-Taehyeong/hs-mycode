@@ -10,10 +10,10 @@ spec:
     app: mycode-server
   ports:
     - protocol: TCP
-      name: Main
+      name: main
       port: 80
       targetPort: 8080
     - protocol: TCP
-      name: Test
+      name: test
       port: 3000
       targetPort: 3000
