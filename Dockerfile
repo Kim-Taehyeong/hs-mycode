@@ -49,6 +49,7 @@ RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USE
 WORKDIR /home/mycode
 
 EXPOSE 8080
+EXPOSE 3000
 
 USER mycode
 
