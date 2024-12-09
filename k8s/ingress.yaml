@@ -4,6 +4,7 @@ metadata:
   name: mycode-server
   namespace: hs
   annotations:
+    nginx.ingress.kubernetes.io/limit-rpm: "3"
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-name: "SESSIONID"
     nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
