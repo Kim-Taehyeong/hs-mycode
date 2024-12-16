@@ -8,6 +8,8 @@ hs(Home Server) Project의 첫번째 단계로 다양한 프로젝트를 하나�
 -  C++
 -  Node.js
 
+Build Test
+
 ## 
 ## Architecture
 

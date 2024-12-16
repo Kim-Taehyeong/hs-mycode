@@ -5,8 +5,8 @@ metadata:
   namespace: hs
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 50Gi
-  storageClassName: nfs-client
+  storageClassName: local-path
