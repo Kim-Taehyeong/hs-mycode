@@ -38,6 +38,16 @@ RUN sudo apt install -y nodejs
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
+RUN sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+
+RUN sudo mkdir -p -m 755 /etc/apt/keyrings
+
+RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+RUN apt-get update && apt-get install kubectl
+
 ARG USER="mycode"
 
 ARG PASSWORD
