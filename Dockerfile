@@ -13,13 +13,6 @@ RUN apt-get update && \
     unzip \
     git \
     wget \
-    libx11-dev \
-    libxkbfile-dev \
-    libsecret-1-dev \
-    libnss3-dev \
-    libasound2-dev \
-    libxtst6 \
-    libxss1 \
     net-tools \
     openjdk-11-jdk \
     python3 \
@@ -30,15 +23,13 @@ RUN apt-get update && \
     python3.10-venv \
     vim \
     iputils-ping \
-    xinetd
+    xinetd \
+    apt-transport-https \
+    gpg
 
 RUN curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -E -
 
-RUN sudo apt install -y nodejs
-
 RUN curl -fsSL https://code-server.dev/install.sh | sh
-
-RUN sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 
 RUN sudo mkdir -p -m 755 /etc/apt/keyrings
 
@@ -46,7 +37,11 @@ RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gp
 
 RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-RUN apt-get update && apt-get install kubectl
+RUN apt-get update && \
+    apt-get install - y \
+    kubectl \
+    nodejs
+
 
 ARG USER="mycode"
 
