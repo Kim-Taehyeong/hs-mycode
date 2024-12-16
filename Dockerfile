@@ -38,7 +38,7 @@ RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gp
 RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 RUN apt-get update && \
-    apt-get install - y \
+    apt-get install -y \
     kubectl \
     nodejs
 
