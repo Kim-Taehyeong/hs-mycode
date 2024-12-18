@@ -24,13 +24,6 @@ spec:
         - name: server
           image: taehyeok02/mycode-server:3
           imagePullPolicy: Always
-          resources:
-            requests:
-              memory: "2Gi"
-              cpu: "1"
-            limits:
-              memory: "4Gi"
-              cpu: "2"
           volumeMounts:
             - name: mycode-data
               mountPath: /home/mycode
