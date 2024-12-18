@@ -11,6 +11,10 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "200m"
     command:
     - /busybox/cat
     tty: true
