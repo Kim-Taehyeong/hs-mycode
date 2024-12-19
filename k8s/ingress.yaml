@@ -46,3 +46,14 @@ spec:
                   number: 3000
             pathType: Prefix
             path: /
+
+    - host: test2.taehyeok.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: mycode-server-service
+                port:
+                  number: 3001
+            pathType: Prefix
+            path: /

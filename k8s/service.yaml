@@ -17,3 +17,7 @@ spec:
       name: test
       port: 3000
       targetPort: 3000
+    - protocol: TCP
+      name: test2
+      port: 3001
+      targetPort: 3001
