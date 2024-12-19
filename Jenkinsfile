@@ -45,7 +45,7 @@ spec:
 		stage('Push Image to Docker Hub') {
 			steps() {
 				container(name : 'kaniko', shell: '/busybox/sh') {
-					sh 'executor --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
+					sh 'executor --no-snapshot --context `pwd` --destination $IMAGE_PUSH_DESTINATION --destination $IMAGE_PUSH_DESTINATION2 --build-arg PASSWORD=${MY_PASSWORD} --cleanup'
 				}
 			}
 		}
