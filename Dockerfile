@@ -55,6 +55,7 @@ WORKDIR /home/mycode
 
 EXPOSE 8080
 EXPOSE 3000
+EXPOSE 3001
 
 USER mycode
 
