@@ -1,31 +1,7 @@
-FROM ubuntu:22.04
+FROM taehyeok02/default-environment:v1.0
 
 ENV TZ=Asia/Seoul
 ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && \
-    apt-get install -y \
-    curl \
-    gnupg2 \
-    lsb-release \
-    sudo \
-    ca-certificates \
-    unzip \
-    git \
-    wget \
-    net-tools \
-    openjdk-11-jdk \
-    python3 \
-    python3-pip \
-    gcc \
-    g++ \
-    tzdata \
-    python3.10-venv \
-    vim \
-    iputils-ping \
-    xinetd \
-    apt-transport-https \
-    gpg
 
 RUN curl -sL https://deb.nodesource.com/setup_22.x | sudo bash -E -
 
@@ -40,8 +16,6 @@ RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://p
 RUN apt-get update && \
     apt-get install -y \
     kubectl \
-    nodejs
-
 
 ARG USER="mycode"
 
