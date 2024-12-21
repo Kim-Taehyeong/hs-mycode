@@ -23,6 +23,9 @@ spec:
     - secretName: test-taehyeok-org-tls
       hosts:
       - test.taehyeok.org
+    - secretName : test2-taehyeok-org-tls
+      hosts:
+      - test2.taehyeok.org
   ingressClassName: nginx
   rules:
     - host: code.taehyeok.org
